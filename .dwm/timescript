@@ -1,0 +1,12 @@
+#!/bin/sh
+COMMAND='echo $(date +%H:%M)'
+xsetroot -name "$(eval $COMMAND)"
+while [ $(date +%S) -ne 0 ] 
+do
+    sleep 1
+done
+while true
+do
+    xsetroot -name "$(eval $COMMAND)"
+    sleep 60
+done
