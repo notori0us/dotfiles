@@ -40,8 +40,6 @@ set title
 set spellcapcheck=""
 " Do not show introduction message when starting vim
 set shortmess=I
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
 " Enable filetype-specific plugins
 filetype plugin on
 " Use filetype-specific automatic indentation
@@ -61,10 +59,10 @@ au Filetype tex inoremap <buffer> ;' <ESC>o\item[]\hfill<cr><TAB><++><ESC>k0f[a
 au Filetype tex inoremap <buffer> (( \left(\right)<++><ESC>10hi
 au Filetype tex inoremap <buffer> [[ \left[\right]<++><ESC>10hi
 au Filetype tex inoremap <buffer> {{ \left\{\right\}<++><ESC>10hi
-au Filetype tex inoremap <buffer> __ _{}<++><ESC>4hi
+au Filetype tex inoremap <buffer> __ _{}<ESC>
 au Filetype tex inoremap <buffer> ^^ ^{}<++><ESC>4hi
 au Filetype tex inoremap <buffer> == &=<space>
-au Filetype tex inoremap <buffer> ;new \documentclass{}<cr>\begin{document}<cr><++><cr>\end{document}<ESC>3kf{a
+inoremap <buffer> ;new \documentclass{}<cr>\begin{document}<cr><++><cr>\end{document}<ESC>3kf{a
 au Filetype tex inoremap <buffer> ;use \usepackage{}<ESC>i
 au Filetype tex inoremap <buffer> ;f \frac{}{<++>}<++><ESC>10hi
 au Filetype tex inoremap <buffer> ;td \todo[]{}<esc>i
