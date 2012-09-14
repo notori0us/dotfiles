@@ -95,7 +95,5 @@ au Filetype tex inoremap <buffer> ;i \textit{}<ESC>i
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
 
-let g:tex_flavor = “latex”
-
 
 
