@@ -55,16 +55,16 @@ inoremap <f1> <esc>
 "-------------------------------------------------------------
 " Various LaTeX mappings to save keystrokes in common situations
 au Filetype tex inoremap <buffer> ;; <ESC>o\item<space>
-au Filetype tex inoremap <buffer> ;' <ESC>o\item[]\hfill<cr><TAB><++><ESC>k0f[a
-au Filetype tex inoremap <buffer> (( \left(\right)<++><ESC>10hi
-au Filetype tex inoremap <buffer> [[ \left[\right]<++><ESC>10hi
-au Filetype tex inoremap <buffer> {{ \left\{\right\}<++><ESC>10hi
-au Filetype tex inoremap <buffer> __ _{}<ESC>
-au Filetype tex inoremap <buffer> ^^ ^{}<++><ESC>4hi
-au Filetype tex inoremap <buffer> == &=<space>
+"au Filetype tex inoremap <buffer> ;' <ESC>o\item[]\hfill<cr><TAB><++><ESC>k0f[a
+"au Filetype tex inoremap <buffer> (( \left(\right)<++><ESC>10hi
+"au Filetype tex inoremap <buffer> [[ \left[\right]<++><ESC>10hi
+"au Filetype tex inoremap <buffer> {{ \left\{\right\}<++><ESC>10hi
+au Filetype tex inoremap <buffer> __ _{}<ESC>i
+au Filetype tex inoremap <buffer> ^^ ^{}<ESC>i
+"au Filetype tex inoremap <buffer> == &=<space>
 inoremap <buffer> ;new \documentclass{}<cr>\begin{document}<cr><++><cr>\end{document}<ESC>3kf{a
 au Filetype tex inoremap <buffer> ;use \usepackage{}<ESC>i
-au Filetype tex inoremap <buffer> ;f \frac{}{<++>}<++><ESC>10hi
+au Filetype tex inoremap <buffer> ;f \frac{}{}<ESC>2hi
 au Filetype tex inoremap <buffer> ;td \todo[]{}<esc>i
 au Filetype tex inoremap <buffer> ;sk \sketch[]{}<esc>i
 au Filetype tex inoremap <buffer> ;mi \begin{minipage}{.9\columnwidth}<cr>\end{minipage}<ESC>ko
@@ -80,6 +80,8 @@ au Filetype tex inoremap <buffer> ;ll \begin{lstlisting}<cr>\end{lstlisting}<ESC
 au Filetype tex inoremap <buffer> ;df \begin{definition}[]<cr>\end{definition}<ESC>ko<++><esc>k0f[a
 au Filetype tex inoremap <buffer> ;xp \begin{example}[]<cr>\end{example}<ESC>ko<++><esc>k0f[a
 au Filetype tex inoremap <buffer> ;sl \begin{solution}<cr>\end{solution}<ESC>ko<++><esc>k0f[a
+au Filetype tex inoremap <buffer> ;b \textbf{}<ESC>i
+au Filetype tex inoremap <buffer> ;i \textit{}<ESC>i
 " Tabularize mappingts for common TeX alignment situations
 "au Filetype tex vnoremap <buffer> <space>& :Tab /&<cr>
 "au Filetype tex vnoremap <buffer> <space>\ :Tab /\\\\<cr>
