@@ -44,12 +44,133 @@ set shortmess=I
 filetype plugin on
 " Use filetype-specific automatic indentation
 filetype indent on
+" line numbers
+set number
 
 " Mappings
 "-------------------------------------------------------------
 " Disable <f1>'s default help functionality.
 nnoremap <f1> <esc>
 inoremap <f1> <esc>
+
+command! SyntaxGroup echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
+"if &t_Co == 256
+
+" Theming
+"-------------------------------------------------------------
+" Grayscale:
+let nfg = 231 " white
+let nbg = 0 " black
+let hfg = 0 " black
+let hbg = 231 " white
+let ifg = 240 " about 30% white
+let ibg = 0 " black
+let efg = 196 " red
+let ebg = 0 " black
+let m1fg = 250 " gray 74
+let m1bg = 0 " black
+let m2fg = 248 " gray 66
+let m2bg = 0 " black
+let m3fg = 244 " gray 50
+let m3bg = 0 " black
+let m4fg = 257 " gray 82
+let m4bg = 0 " black
+
+" ------------------------------------------------------------------------------
+"- general syntax (theme) -
+"  ------------------------------------------------------------------------------
+execute "highlight Comment cterm = NONE"
+execute "highlight Comment ctermfg = " . ifg
+execute "highlight Comment ctermbg = " . ibg
+execute "highlight Constant cterm = NONE"
+execute "highlight Constant ctermfg = " . m3fg
+execute "highlight Constant ctermbg = " . m3bg
+execute "highlight Error cterm = NONE"
+execute "highlight Error ctermfg = " . m2fg
+execute "highlight Error ctermbg = " . m2bg
+execute "highlight Identifier cterm = NONE"
+execute "highlight Identifier ctermfg = " . m3fg
+execute "highlight Identifier ctermbg = " . m3bg
+execute "highlight PreProc cterm = NONE"
+execute "highlight PreProc ctermfg = " . m2fg
+execute "highlight PreProc ctermbg = " . m2bg
+execute "highlight Special cterm = NONE"
+execute "highlight Special ctermfg = " . m1fg
+execute "highlight Special ctermbg = " . m1bg
+execute "highlight Statement cterm = NONE"
+execute "highlight Statement ctermfg = " . m1fg
+execute "highlight Statement ctermbg = " . m1bg
+execute "highlight Type cterm = NONE"
+execute "highlight Type ctermfg = " . m4fg
+execute "highlight Type ctermbg = " . m4bg
+" spelling
+highlight clear SpellBad
+highlight SpellBad cterm=underline
+
+" ------------------------------------------------------------------------------
+"  " - vim chrome (theme) -
+"  ------------------------------------------------------------------------------
+
+
+execute "highlight LineNr cterm = None"
+execute "highlight LineNr ctermfg = " . ifg
+execute "highlight LineNr ctermbg = " . ibg
+execute "highlight SpecialKey cterm = NONE"
+execute "highlight SpecialKey ctermfg = " . ifg
+execute "highlight SpecialKey ctermbg = " . ibg
+execute "highlight Folded cterm = NONE"
+execute "highlight Folded ctermfg = " . ifg
+execute "highlight Folded ctermbg = " . ibg
+execute "highlight MatchParen cterm = NONE"
+execute "highlight MatchParen ctermfg = " . hfg
+execute "highlight MatchParen ctermbg = " . hbg
+execute "highlight NonText cterm = NONE"
+execute "highlight NonText ctermfg = " . ifg
+execute "highlight NonText ctermbg = " . ibg
+execute "highlight Search cterm = NONE"
+execute "highlight Search ctermfg = " . hfg
+execute "highlight Search ctermbg = " . hbg
+execute "highlight ModeMsg cterm = NONE"
+execute "highlight ModeMsg ctermfg = " . ifg
+execute "highlight ModeMsg ctermbg = " . ibg
+execute "highlight MoreMsg cterm = NONE"
+execute "highlight MoreMsg ctermfg = " . ifg
+execute "highlight MoreMsg ctermbg = " . ibg
+execute "highlight Pmenu cterm = NONE"
+execute "highlight Pmenu ctermfg = " . nfg
+execute "highlight Pmenu ctermbg = " . nbg
+execute "highlight PmenuSel cterm = NONE"
+execute "highlight PmenuSel ctermfg = " . hfg
+execute "highlight PmenuSel ctermbg = " . hbg
+execute "highlight PmenuSbar cterm = NONE"
+execute "highlight PmenuSbar ctermfg = " . efg
+execute "highlight PmenuSbar ctermbg = " . ebg
+execute "highlight StatusLine cterm = NONE"
+execute "highlight StatusLine ctermfg = " . ifg
+execute "highlight StatusLine ctermbg = " . ibg
+execute "highlight StatusLineNC cterm = NONE"
+execute "highlight StatusLineNC ctermfg = " . ifg
+execute "highlight StatusLineNC ctermbg = " . ibg
+execute "highlight TabLine cterm = NONE"
+execute "highlight TabLine ctermfg = " . ifg
+execute "highlight TabLine ctermbg = " . ibg
+execute "highlight TabLineFill cterm = NONE"
+execute "highlight TabLineFill ctermbg = " . nfg
+execute "highlight TabLineSel cterm = NONE"
+execute "highlight TabLineSel ctermfg = " . hfg
+execute "highlight TabLineSel ctermbg = " . hbg
+execute "highlight Title cterm = NONE"
+execute "highlight Title ctermfg = " . ifg
+execute "highlight Title ctermbg = " . ibg
+execute "highlight VertSplit cterm = NONE"
+execute "highlight VertSplit ctermfg = " . ifg
+execute "highlight VertSplit ctermbg = " . ibg
+execute "highlight Visual cterm = NONE"
+execute "highlight Visual ctermfg = " . nbg
+execute "highlight Visual ctermbg = " . nfg
+
+"endif
 
 "---Mappings for tex
 "-------------------------------------------------------------
