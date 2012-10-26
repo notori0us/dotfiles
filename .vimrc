@@ -1,7 +1,6 @@
 "=============================================================
-"== notori0us .vimrc					    ==
+"== notori0us .vimrc										==
 "=============================================================
-
 " General Settings
 "-------------------------------------------------------------
 " Disable compatability
@@ -46,6 +45,11 @@ filetype plugin on
 filetype indent on
 " line numbers
 set number
+
+" Awesome indents
+"-------------------------------------------------------------
+set list
+set listchars=tab:>·,trail:·,extends:…,precedes:…,nbsp:&
 
 " Mappings
 "-------------------------------------------------------------
@@ -172,8 +176,20 @@ execute "highlight Visual ctermbg = " . nfg
 
 "endif
 
-"---Mappings for tex
+"---Python Mappings
 "-------------------------------------------------------------
+" Convert indentation from spaces to tabs when opening a file.
+au Filetype python retab!
+" Convert indentation from tabs to spaces when wring a file to disk, then
+" immediately back when saving is done.
+au Filetype python au BufWritePre * :set expandtab
+au Filetype python au BufWritePre * :retab!
+au Filetype python au BufWritePost * :set noexpandtab!
+au Filetype python au BufWritePost * :retab!
+
+"---TeX Mappings
+"-------------------------------------------------------------
+let g:tex_flavor='latex'
 " Various LaTeX mappings to save keystrokes in common situations
 au Filetype tex inoremap <buffer> ;; <ESC>o\item<space>
 "au Filetype tex inoremap <buffer> ;' <ESC>o\item[]\hfill<cr><TAB><++><ESC>k0f[a
@@ -183,7 +199,7 @@ au Filetype tex inoremap <buffer> ;; <ESC>o\item<space>
 au Filetype tex inoremap <buffer> __ _{}<ESC>i
 au Filetype tex inoremap <buffer> ^^ ^{}<ESC>i
 "au Filetype tex inoremap <buffer> == &=<space>
-inoremap <buffer> ;new \documentclass{}<cr>\begin{document}<cr><++><cr>\end{document}<ESC>3kf{a
+au Filetype tex inoremap <buffer> ;new \documentclass{}<cr>\begin{document}<cr><++><cr>\end{document}<ESC>3kf{a
 au Filetype tex inoremap <buffer> ;use \usepackage{}<ESC>i
 au Filetype tex inoremap <buffer> ;f \frac{}{}<ESC>2hi
 au Filetype tex inoremap <buffer> ;td \todo[]{}<esc>i
