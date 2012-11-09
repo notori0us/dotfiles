@@ -1,4 +1,5 @@
 setxkbmap dvorak
+wmname LG3D &
 exec /home/chris/.dropbox-dist/dropboxd &
 exec /home/chris/.dwm/timescript &
 exec /home/chris/.dwm/dwm
