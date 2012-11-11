@@ -277,12 +277,12 @@ alias vps="ssh chris@notoriouscw.com"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 alias ls="ls --color=auto -h --group-directories-first"
-alias la="ls -A --color=auto -h --group-directories-first"
-alias ll="ls -lA --color=auto -h --group-directories-first"
-alias du="du -hs"
-alias df="df -h"
-alias grep="grep -IR --color=yes -D skip --exclude-dir=.git"
-alias cl="clive --format=best"
+#alias la="ls -A --color=auto -h --group-directories-first"
+#alias ll="ls -lA --color=auto -h --group-directories-first"
+#alias du="du -hs"
+#alias df="df -h"
+#alias grep="grep -IR --color=yes -D skip --exclude-dir=.git"
+#alias cl="clive --format=best"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # git
