@@ -245,10 +245,10 @@ fi
 # - shortcuts to existing commands (aliases) -
 # ------------------------------------------------------------------------------
 
-alias ss='sleep 5; xwd -root | xwdtopnm | pnmtopng > capture.png'
+alias ss='sleep 5; xwd -root | convert - capture.png'
 alias off='sudo shutdown -h now'
 alias wifi="wicd-curses"
-alias stdlinux='ssh -X wallacch@stdlinux.cse.ohio-state.edu'
+alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
 alias stallman="ssh -X notori0us@stallman.cse.ohio-state.edu"
 alias irc="ssh irc@notoriouscw.com"
 alias vps="ssh chris@notoriouscw.com"
