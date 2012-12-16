@@ -252,6 +252,7 @@ alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
 alias stallman="ssh -X notori0us@stallman.cse.ohio-state.edu"
 alias irc="ssh irc@notoriouscw.com"
 alias vps="ssh chris@notoriouscw.com"
+alias secure-browser="google-chrome --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
 #alias fman="$FILEMAN ."
 #alias mc="java -jar ~/prog/minecraft/minecraft.jar&exit"
 #alias py="python"
