@@ -230,7 +230,7 @@ fi
 # ------------------------------------------------------------------------------
 
 # Clear the screen then run `ls`
-#alias cls="clear;ls"
+alias cls="clear;ls"
 
 # Search entire filesystem and ignore errors
 #alias finds="find / -name 2>/dev/null"
@@ -240,6 +240,13 @@ fi
 
 # allow others to read/execute
 #alias yours="sudo find . -perm -u+x -exec chmod a+x {} \; && sudo find . -perm -u+r -exec chmod a+r {} \;"
+
+# ------------------------------------------------------------------------------
+# - filesystem jump shortcuts (aliases)
+# ------------------------------------------------------------------------------
+
+alias a="cd; cd Dropbox/academics; cd"
+alias d="cd; cd Dropbox/; cd"
 
 # ------------------------------------------------------------------------------
 # - shortcuts to existing commands (aliases) -
