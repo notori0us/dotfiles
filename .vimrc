@@ -59,6 +59,11 @@ inoremap <f1> <esc>
 
 command! SyntaxGroup echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 
+" easy make command
+nnoremap <space>m :w<cr>:!clear<cr>:silent make %<cr>:cc<cr>
+" easy write command
+nnoremap <space>w :w<cr>
+
 "if &t_Co == 256
 
 " Theming
@@ -187,45 +192,61 @@ au Filetype python au BufWritePre * :retab!
 au Filetype python au BufWritePost * :set noexpandtab!
 au Filetype python au BufWritePost * :retab!
 
+
+"---C Mappings
+"-------------------------------------------------------------
+augroup c
+	autocmd!
+	" Set compiler.
+	autocmd Filetype c set makeprg=gcc
+	" Execute result.
+	autocmd Filetype c nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;./a.out<cr>
+augroup END
+
 "---TeX Mappings
 "-------------------------------------------------------------
-let g:tex_flavor='latex'
-" Various LaTeX mappings to save keystrokes in common situations
-au Filetype tex inoremap <buffer> ;; <ESC>o\item<space>
-"au Filetype tex inoremap <buffer> ;' <ESC>o\item[]\hfill<cr><TAB><++><ESC>k0f[a
-"au Filetype tex inoremap <buffer> (( \left(\right)<++><ESC>10hi
-"au Filetype tex inoremap <buffer> [[ \left[\right]<++><ESC>10hi
-"au Filetype tex inoremap <buffer> {{ \left\{\right\}<++><ESC>10hi
-au Filetype tex inoremap <buffer> __ _{}<ESC>i
-au Filetype tex inoremap <buffer> ^^ ^{}<ESC>i
-"au Filetype tex inoremap <buffer> == &=<space>
-au Filetype tex inoremap <buffer> ;new \documentclass{}<cr>\begin{document}<cr><++><cr>\end{document}<ESC>3kf{a
-au Filetype tex inoremap <buffer> ;use \usepackage{}<ESC>i
-au Filetype tex inoremap <buffer> ;f \frac{}{}<ESC>2hi
-au Filetype tex inoremap <buffer> ;td \todo[]{}<esc>i
-au Filetype tex inoremap <buffer> ;sk \sketch[]{}<esc>i
-au Filetype tex inoremap <buffer> ;mi \begin{minipage}{.9\columnwidth}<cr>\end{minipage}<ESC>ko
-au Filetype tex inoremap <buffer> ;al \begin{align*}<cr>\end{align*}<ESC>ko
-au Filetype tex inoremap <buffer> ;mb \begin{bmatrix}<cr>\end{bmatrix}<ESC>ko
-au Filetype tex inoremap <buffer> ;mp \begin{pmatrix}<cr>\end{pmatrix}<ESC>ko
-au Filetype tex inoremap <buffer> ;li \begin{itemize}<cr>\end{itemize}<ESC>ko\item<space>
-au Filetype tex inoremap <buffer> ;le \begin{enumerate}<cr>\end{enumerate}<ESC>ko\item<space>
-au Filetype tex inoremap <buffer> ;ld \begin{description}<cr>\end{description}<ESC>ko\item[]\hfill<cr><tab><++><ESC>k0f[a
-au Filetype tex inoremap <buffer> ;ca \begin{cases}<cr>\end{cases}<ESC>ko
-au Filetype tex inoremap <buffer> ;tb \begin{tabular}{llllllllll}<cr>\end{tabular}<ESC>ko\toprule<cr>\midrule<cr>\bottomrule<ESC>kko
-au Filetype tex inoremap <buffer> ;ll \begin{lstlisting}<cr>\end{lstlisting}<ESC>ko
-au Filetype tex inoremap <buffer> ;df \begin{definition}[]<cr>\end{definition}<ESC>ko<++><esc>k0f[a
-au Filetype tex inoremap <buffer> ;xp \begin{example}[]<cr>\end{example}<ESC>ko<++><esc>k0f[a
-au Filetype tex inoremap <buffer> ;sl \begin{solution}<cr>\end{solution}<ESC>ko<++><esc>k0f[a
-au Filetype tex inoremap <buffer> ;b \textbf{}<ESC>i
-au Filetype tex inoremap <buffer> ;i \textit{}<ESC>i
-" Tabularize mappingts for common TeX alignment situations
-"au Filetype tex vnoremap <buffer> <space>& :Tab /&<cr>
-"au Filetype tex vnoremap <buffer> <space>\ :Tab /\\\\<cr>
-"au Filetype tex vnoremap <buffer> <space>tl :Tab /&<cr>gv:Tab /\\\\<cr>
-"au Filetype tex nnoremap <buffer> <space>& :Tab /&<cr>
-"au Filetype tex nnoremap <buffer> <space>\ :Tab /\\\\<cr>
-"au Filetype tex nnoremap <buffer> <space>tl :Tab /&<cr>gv:Tab /\\\\<cr>
+"let g:tex_flavor='latex'
+augroup latex
+	" compile command
+	autocmd Filetype tex setlocal makeprg=lualatex\ \-file\-line\-error\ \-interaction=nonstopmode\ $*\\\|\ awk\ '/^\\(.*.tex$/{sub(/^./,\"\",$0);X=$0}\ /^!/{sub(/^./,\"\",$0);print\ X\":1:\"$0}\ /tex:[0-9]+:\ /{A=$0;MORE=2}\ (MORE==2\ &&\ /^l.[0-9]/){sub(/^l.[0-9]+[\ \\t]+/,\"\",$0);B=$0;MORE=1}\ (MORE==1\ &&\ /^[\ ]+/){sub(/^[\ \\t]+/,\"\",$0);print\ A\":\ \"B\"·\"$0;MORE=0}'
+
+	" Various LaTeX mappings to save keystrokes in common situations
+	au Filetype tex inoremap <buffer> ;; <ESC>o\item<space>
+	"au Filetype tex inoremap <buffer> ;' <ESC>o\item[]\hfill<cr><TAB><++><ESC>k0f[a
+	"au Filetype tex inoremap <buffer> (( \left(\right)<++><ESC>10hi
+	"au Filetype tex inoremap <buffer> [[ \left[\right]<++><ESC>10hi
+	"au Filetype tex inoremap <buffer> {{ \left\{\right\}<++><ESC>10hi
+	au Filetype tex inoremap <buffer> __ _{}<ESC>i
+	au Filetype tex inoremap <buffer> ^^ ^{}<ESC>i
+	"au Filetype tex inoremap <buffer> == &=<space>
+	au Filetype tex inoremap <buffer> ;new \documentclass{}<cr>\begin{document}<cr><++><cr>\end{document}<ESC>3kf{a
+	au Filetype tex inoremap <buffer> ;use \usepackage{}<ESC>i
+	au Filetype tex inoremap <buffer> ;f \frac{}{}<ESC>2hi
+	au Filetype tex inoremap <buffer> ;td \todo[]{}<esc>i
+	au Filetype tex inoremap <buffer> ;sk \sketch[]{}<esc>i
+	au Filetype tex inoremap <buffer> ;mi \begin{minipage}{.9\columnwidth}<cr>\end{minipage}<ESC>ko
+	au Filetype tex inoremap <buffer> ;al \begin{align*}<cr>\end{align*}<ESC>ko
+	au Filetype tex inoremap <buffer> ;mb \begin{bmatrix}<cr>\end{bmatrix}<ESC>ko
+	au Filetype tex inoremap <buffer> ;mp \begin{pmatrix}<cr>\end{pmatrix}<ESC>ko
+	au Filetype tex inoremap <buffer> ;li \begin{itemize}<cr>\end{itemize}<ESC>ko\item<space>
+	au Filetype tex inoremap <buffer> ;le \begin{enumerate}<cr>\end{enumerate}<ESC>ko\item<space>
+	au Filetype tex inoremap <buffer> ;ld \begin{description}<cr>\end{description}<ESC>ko\item[]\hfill<cr><tab><++><ESC>k0f[a
+	au Filetype tex inoremap <buffer> ;ca \begin{cases}<cr>\end{cases}<ESC>ko
+	au Filetype tex inoremap <buffer> ;tb \begin{tabular}{llllllllll}<cr>\end{tabular}<ESC>ko\toprule<cr>\midrule<cr>\bottomrule<ESC>kko
+	au Filetype tex inoremap <buffer> ;ll \begin{lstlisting}<cr>\end{lstlisting}<ESC>ko
+	au Filetype tex inoremap <buffer> ;df \begin{definition}[]<cr>\end{definition}<ESC>ko<++><esc>k0f[a
+	au Filetype tex inoremap <buffer> ;xp \begin{example}[]<cr>\end{example}<ESC>ko<++><esc>k0f[a
+	au Filetype tex inoremap <buffer> ;sl \begin{solution}<cr>\end{solution}<ESC>ko<++><esc>k0f[a
+	au Filetype tex inoremap <buffer> ;b \textbf{}<ESC>i
+	au Filetype tex inoremap <buffer> ;i \textit{}<ESC>i
+	" Tabularize mappingts for common TeX alignment situations
+	"au Filetype tex vnoremap <buffer> <space>& :Tab /&<cr>
+	"au Filetype tex vnoremap <buffer> <space>\ :Tab /\\\\<cr>
+	"au Filetype tex vnoremap <buffer> <space>tl :Tab /&<cr>gv:Tab /\\\\<cr>
+	"au Filetype tex nnoremap <buffer> <space>& :Tab /&<cr>
+	"au Filetype tex nnoremap <buffer> <space>\ :Tab /\\\\<cr>
+	"au Filetype tex nnoremap <buffer> <space>tl :Tab /&<cr>gv:Tab /\\\\<cr>
+augroup END
 
 " ETC
 "-------------------------------------------------------------
