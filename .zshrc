@@ -291,7 +291,7 @@ alias secure-browser="google-chrome --proxy-server=\"socks5://localhost:5222\" &
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 alias ls="ls --color=auto -h --group-directories-first"
-alias emacs="emacs -nt"
+alias emacs="emacs -nw"
 #alias la="ls -A --color=auto -h --group-directories-first"
 #alias ll="ls -lA --color=auto -h --group-directories-first"
 #alias du="du -hs"
