@@ -11,7 +11,7 @@ Version controlling dotfiles is a great idea, allowing
 others to share and use your configurations. Please, however,
 be wary of verbatim copying. These settings are tailored toward myself.
 
-Copyright (C) 2013 Chris Wallace
+This document Copyright (C) 2013 Chris Wallace
 
 *Permission is granted to make and distribute verbatim copies of this
 document provided the copyright notice and this permission notice are
