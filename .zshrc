@@ -17,6 +17,12 @@ compinit
 # End of lines added by compinstall
 
 # ==============================================================================
+# = auto startx
+# ==============================================================================
+
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+# ==============================================================================
 # = general settings =
 # ==============================================================================
 
@@ -175,8 +181,6 @@ export SHELL="/bin/zsh"
 # Set the default text editor.
 export EDITOR="vim"
 
-# if in X11, set firefox as browser
-# else, set elinks as browser
 if [[ -z $DISPLAY ]]; then
 	export BROWSER="elinks"
 else
@@ -286,6 +290,7 @@ alias secure-browser="google-chrome --proxy-server=\"socks5://localhost:5222\" &
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 alias ls="ls --color=auto -h --group-directories-first"
+alias emacs="emacs -nt"
 #alias la="ls -A --color=auto -h --group-directories-first"
 #alias ll="ls -lA --color=auto -h --group-directories-first"
 #alias du="du -hs"
