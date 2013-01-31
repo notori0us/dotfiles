@@ -261,6 +261,7 @@ alias off='sudo shutdown -h now'
 alias wifi="wicd-curses"
 alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
 alias stallman="ssh -X notori0us@stallman.cse.ohio-state.edu"
+alias idle2="ssh notori0us@opensource.osu.edu"
 alias irc="ssh irc@notoriouscw.com"
 alias vps="ssh chris@notoriouscw.com"
 alias secure-browser="google-chrome --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
