@@ -265,7 +265,7 @@ alias idle2="ssh notori0us@opensource.osu.edu"
 alias irc="ssh irc@notoriouscw.com"
 alias vps="ssh chris@notoriouscw.com"
 alias torvalds="ssh -p 122 notori0us@opensource.osu.edu"
-alias secure-browser="google-chrome --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
+alias secure-browser="chromium --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
 #alias fman="$FILEMAN ."
 #alias mc="java -jar ~/prog/minecraft/minecraft.jar&exit"
 #alias py="python"
@@ -352,3 +352,8 @@ alias emacs="emacs -nw"
 #alias cp="nocorrect cp"
 #alias mv="nocorrect mv"
 #alias ln="nocorrect ln"
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# RESEARCH
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+source /home/chris/research/emulator-iscsi/pfe_scripts/pfe_global.sh
