@@ -259,12 +259,6 @@ alias d="cd; cd Dropbox/; cd"
 alias ss='sleep 5; xwd -root | convert - capture.png'
 alias off='sudo shutdown -h now'
 alias wifi="wicd-curses"
-alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
-alias stallman="ssh notori0us@stallman.cse.ohio-state.edu"
-alias idle2="ssh notori0us@opensource.osu.edu"
-alias irc="ssh irc@notoriouscw.com"
-alias vps="ssh chris@notoriouscw.com"
-alias torvalds="ssh -p 122 notori0us@opensource.osu.edu"
 alias secure-browser="chromium --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
 #alias fman="$FILEMAN ."
 #alias mc="java -jar ~/prog/minecraft/minecraft.jar&exit"
@@ -283,9 +277,16 @@ alias secure-browser="chromium --incognito --proxy-server=\"socks5://localhost:5
 #alias vv="cd /dev/shm/"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Networking, ssh, remote drives, etc.
+# ssh shortcuts
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
+alias stallman="ssh notori0us@stallman.cse.ohio-state.edu"
+alias raspi="ssh chris@home.notoriouscw.com"
+alias idle2="ssh notori0us@opensource.osu.edu"
+alias irc="ssh irc@notoriouscw.com"
+alias vps="ssh chris@notoriouscw.com"
+alias torvalds="ssh -p 122 notori0us@opensource.osu.edu"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # set default flags
