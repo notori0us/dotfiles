@@ -46,6 +46,14 @@ filetype indent on
 " line numbers
 set number
 
+" pathogen
+"-------------------------------------------------------------
+call pathogen#infect() 
+
+" skybison
+"-------------------------------------------------------------
+nnoremap : :<c-u>call SkyBison("")<cr>
+
 " Awesome indents
 "-------------------------------------------------------------
 set list
@@ -192,6 +200,9 @@ au Filetype python au BufWritePre * :retab!
 au Filetype python au BufWritePost * :set noexpandtab!
 au Filetype python au BufWritePost * :retab!
 
+augroup python
+	autocmd Filetype python nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;perl %<cr>
+augroup END
 
 "---C Mappings
 "-------------------------------------------------------------
@@ -201,6 +212,18 @@ augroup c
 	autocmd Filetype c set makeprg=gcc
 	" Execute result.
 	autocmd Filetype c nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;./a.out<cr>
+augroup END
+
+"---Perl Mappings
+"-------------------------------------------------------------
+augroup perl
+	autocmd Filetype perl nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;perl %<cr>
+augroup END
+
+"---Ruby Mappings
+"-------------------------------------------------------------
+augroup ruby
+	autocmd Filetype ruby nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;ruby %<cr>
 augroup END
 
 "---TeX Mappings
@@ -236,7 +259,8 @@ augroup latex
 	au Filetype tex inoremap <buffer> ;ll \begin{lstlisting}<cr>\end{lstlisting}<ESC>ko
 	au Filetype tex inoremap <buffer> ;df \begin{definition}[]<cr>\end{definition}<ESC>ko<++><esc>k0f[a
 	au Filetype tex inoremap <buffer> ;xp \begin{example}[]<cr>\end{example}<ESC>ko<++><esc>k0f[a
-	au Filetype tex inoremap <buffer> ;sl \begin{solution}<cr>\end{solution}<ESC>ko<++><esc>k0f[a
+	"au Filetype tex inoremap <buffer> ;sl \begin{solution}<cr>\end{solution}<ESC>ko<++><esc>k0f[a
+	au Filetype tex inoremap <buffer> ;sl \begin{slide}<cr>\end{slide}<ESC>ko<space>
 	au Filetype tex inoremap <buffer> ;b \textbf{}<ESC>i
 	au Filetype tex inoremap <buffer> ;i \textit{}<ESC>i
 	" Tabularize mappingts for common TeX alignment situations
@@ -246,6 +270,9 @@ augroup latex
 	"au Filetype tex nnoremap <buffer> <space>& :Tab /&<cr>
 	"au Filetype tex nnoremap <buffer> <space>\ :Tab /\\\\<cr>
 	"au Filetype tex nnoremap <buffer> <space>tl :Tab /&<cr>gv:Tab /\\\\<cr>
+
+
+	autocmd Filetype tex nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;evince %<.pdf > /dev/null 2>&1 &<cr>
 augroup END
 
 " ETC
