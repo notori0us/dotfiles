@@ -358,3 +358,10 @@ alias emacs="emacs -nw"
 # RESEARCH
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 source /home/chris/research/emulator-iscsi/pfe_scripts/pfe_global.sh
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# RVM (the ruby version manager)
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+source /home/chris/.rvm/scripts/rvm
+#rvm use 1.9.3 > /dev/null
