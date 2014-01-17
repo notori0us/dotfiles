@@ -7,6 +7,8 @@
 # step a)
 mkdir ~/backup;
 
+echo "is set up" >> already_set_up
+
 for dotfile in .*
 do
 	if [ "." != "$dotfile" -a ".." != "$dotfile" ]
@@ -22,3 +24,13 @@ do
 	fi
 
 done
+
+# install skybison
+if [ -z $(find "$PWD/.vim/bundle" -name "skybison") ]
+then
+	git clone https://github.com/paradigm/SkyBison.git;
+	mkdir .vim/bundle/skybison;
+	mv SkyBison/plugin .vim/bundle/skybison/plugin;
+
+	rm -rf SkyBison;
+fi

@@ -6,10 +6,8 @@
 
 # step a)
 
-subpath()
-{
-    echo "$1" | rev | cut -d"/" -f1-$2 | rev
-}
+rm already_set_up
+
 for file in $HOME/backup/.*
 do
 
