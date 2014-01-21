@@ -1,8 +1,8 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
 # script to systematically
 # a) back up the current dotfiles that conflict with the ones here
-# b) create symlinks from this folder back
+# b) create symlinks from this folder back here
 
 # step a)
 mkdir ~/backup;
