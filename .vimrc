@@ -216,12 +216,12 @@ augroup END
 
 "---C++ Mappings
 "-------------------------------------------------------------
-augroup c++
+augroup cpp
 	autocmd!
 	" Set compiler.
-	autocmd Filetype c++ set makeprg=g++
+	autocmd Filetype cpp set makeprg=g++
 	" Execute result.
-	autocmd Filetype c++ nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;./a.out<cr>
+	autocmd Filetype cpp nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;./a.out<cr>
 augroup END
 
 
