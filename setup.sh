@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 # script to systematically
 # a) back up the current dotfiles that conflict with the ones here
@@ -29,6 +29,7 @@ done
 if [ -z $(find "$PWD/.vim/bundle" -name "skybison") ]
 then
 	git clone https://github.com/paradigm/SkyBison.git;
+	mkdir .vim/bundle
 	mkdir .vim/bundle/skybison;
 	mv SkyBison/plugin .vim/bundle/skybison/plugin;
 
