@@ -29,7 +29,7 @@ done
 if [ -z $(find "$PWD/.vim/bundle" -name "skybison") ]
 then
 	git clone https://github.com/paradigm/SkyBison.git;
-	mkdir .vim/bundle
+	mkdir .vim/bundle;
 	mkdir .vim/bundle/skybison;
 	mv SkyBison/plugin .vim/bundle/skybison/plugin;
 
