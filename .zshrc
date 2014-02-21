@@ -4,8 +4,8 @@
 
 # Lines configured by zsh-newuser-install, minus those also set by Paradigm
 HISTFILE=~/.history
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt appendhistory
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -150,6 +150,10 @@ zle -N prepend-vim
 # cd into a directory then immediately ls
 cds() {
 	cd $1 && ls
+}
+
+brb() {
+	slock & sudo pm-suspend;
 }
 
 
