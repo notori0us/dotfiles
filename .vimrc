@@ -271,7 +271,7 @@ augroup latex
 	au Filetype tex inoremap <buffer> ;df \begin{definition}[]<cr>\end{definition}<ESC>ko<++><esc>k0f[a
 	au Filetype tex inoremap <buffer> ;xp \begin{example}[]<cr>\end{example}<ESC>ko<++><esc>k0f[a
 	"au Filetype tex inoremap <buffer> ;sl \begin{solution}<cr>\end{solution}<ESC>ko<++><esc>k0f[a
-	au Filetype tex inoremap <buffer> ;sl \begin{slide}<cr>\end{slide}<ESC>ko<space>
+	au Filetype tex inoremap <buffer> ;sl \begin{slide}<cr>\end{slide}<ESC>ko
 	au Filetype tex inoremap <buffer> ;b \textbf{}<ESC>i
 	au Filetype tex inoremap <buffer> ;i \textit{}<ESC>i
 	" Tabularize mappingts for common TeX alignment situations
