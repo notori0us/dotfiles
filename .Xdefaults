@@ -5,7 +5,7 @@
 *.highlight: #888888
 *.scrollBar: false
 xterm*faceName:           Terminus:style=Normal:size=1
-!xterm*font: -xos4-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*
+urxvt*font: -xos4-terminus-medium-r-normal-*-24-*-*-*-*-*-*-*
 *.colorBD: #888888
 
 ! have urls in xterm act as one word so it can be double-clicked to select
