@@ -1,7 +1,6 @@
 # With great thanks and credit to Paradigm and his wonderfully crafted .zshrc
 # https://github.com/paradigm/dotfiles/blob/master/.zshrc
 
-
 # Lines configured by zsh-newuser-install, minus those also set by Paradigm
 HISTFILE=~/.history
 HISTSIZE=10000
@@ -288,7 +287,7 @@ alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
 alias stallman="ssh notori0us@stallman.cse.ohio-state.edu"
 alias raspi="ssh chris@home.notoriouscw.com"
 alias idle2="ssh notori0us@opensource.osu.edu"
-alias irc="ssh irc@notoriouscw.com"
+alias irc="ssh irc@chriswallace.io"
 alias vps="ssh chris@notoriouscw.com"
 alias torvalds="ssh -p 122 notori0us@opensource.osu.edu"
 
