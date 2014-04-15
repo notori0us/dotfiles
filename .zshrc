@@ -285,10 +285,10 @@ alias secure-browser="chromium --incognito --proxy-server=\"socks5://localhost:5
 
 alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
 alias stallman="ssh notori0us@stallman.cse.ohio-state.edu"
-alias raspi="ssh chris@home.notoriouscw.com"
+#alias raspi="ssh chris@home.notoriouscw.com"
 alias idle2="ssh notori0us@opensource.osu.edu"
 alias irc="ssh irc@chriswallace.io"
-alias vps="ssh chris@notoriouscw.com"
+alias vps="ssh chris@chriswallace.io"
 alias torvalds="ssh -p 122 notori0us@opensource.osu.edu"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
