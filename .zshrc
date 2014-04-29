@@ -187,7 +187,7 @@ export EDITOR="vim"
 if [[ -z $DISPLAY ]]; then
 	export BROWSER="elinks"
 else
-	export BROWSER="google-chrome"
+	export BROWSER="firefox"
 fi
 
 # If in a terminal that can use 256 colors, ensure TERM reflects that fact.
@@ -263,6 +263,7 @@ alias ss='sleep 5; xwd -root | convert - capture.png'
 alias off='sudo shutdown -h now'
 alias wifi="wicd-curses"
 alias secure-browser="chromium --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
+alias update-debian='sudo bash -c "apt-get update; apt-get upgrade; apt-get dist-upgrade;"'
 #alias fman="$FILEMAN ."
 #alias mc="java -jar ~/prog/minecraft/minecraft.jar&exit"
 #alias py="python"
