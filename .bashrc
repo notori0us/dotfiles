@@ -59,9 +59,9 @@ BLUE='\[\033[0;34m\]'
 NORMAL='\[\033[00m\]'
 
 if [ "$color_prompt" = yes ]; then
-	if [ $UID -eq 0 ]; then
-		PS1="${BBLUE}[${BRED}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n\$ "
-	else
+	if [ $UID -eq 0 ]; then # root
+		PS1="${BBLUE}[${BRED}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n# "
+	else # not root
 		PS1="${BBLUE}[${BGREEN}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n\$ "
 	fi
 else
