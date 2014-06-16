@@ -59,7 +59,11 @@ BLUE='\[\033[0;34m\]'
 NORMAL='\[\033[00m\]'
 
 if [ "$color_prompt" = yes ]; then
-    PS1="${BBLUE}[${BGREEN}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n\$ "
+	if [ $UID -eq 0 ]; then
+		PS1="${BBLUE}[${BRED}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n\$ "
+	else
+		PS1="${BBLUE}[${BGREEN}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n\$ "
+	fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
