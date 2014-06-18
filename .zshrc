@@ -368,14 +368,8 @@ fi
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# RVM (the ruby version manager)
+# JAVA
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-if [[ $(hostname) == "aquarius" ]]
-then
-	source /home/chris/.rvm/scripts/rvm
-fi
-#rvm use 1.9.3 > /dev/null
-
 if [[ $(hostname) == "aquarius" ]]
 then
 	export JAVA_HOME="/usr/lib/jvm/java-6-openjdk-amd64";
