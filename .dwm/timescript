@@ -1,5 +1,5 @@
 #!/bin/sh
-COMMAND='echo $(date +%A,%t%B%t%d%t%H:%M)'
+COMMAND='echo $(date +%A,%t%Y-%m-%d,%t%H:%M)'
 xsetroot -name "$(eval $COMMAND)"
 while [ $(date +%S) -ne 0 ]
 do
