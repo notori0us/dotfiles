@@ -1,10 +1,10 @@
 ! notori0us xdefaults
 
-*.foreground: #ffffff
-*.background: #000000
+*.foreground: #000000
+*.background: #ffffff
 *.highlight: #888888
 *.scrollBar: false
-xterm*faceName:           Terminus:style=Normal:size=1
+xterm*faceName:           Terminus:style=Normal:size=8
 urxvt*font: -xos4-terminus-medium-r-normal-*-24-*-*-*-*-*-*-*
 *.colorBD: #888888
 
