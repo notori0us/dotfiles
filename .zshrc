@@ -64,7 +64,7 @@ setopt interactivecomments
 WORDCHARS=${WORDCHARS//\/}
 
 # vi mode
-binkey -v
+bindkey -v
 
 # ==============================================================================
 # = completion =
