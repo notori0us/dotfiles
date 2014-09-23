@@ -63,6 +63,9 @@ setopt interactivecomments
 # consider / a word break, for ctrl-w
 WORDCHARS=${WORDCHARS//\/}
 
+# vi mode
+binkey -v
+
 # ==============================================================================
 # = completion =
 # ==============================================================================
@@ -263,6 +266,7 @@ alias ss='sleep 5; xwd -root | convert - capture.png'
 alias off='sudo shutdown -h now'
 alias wifi="wicd-curses"
 alias secure-browser="chromium --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
+alias shadow-browser="chromium --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 darknet@23.94.15.15"
 alias update-debian='sudo bash -c "apt-get update; apt-get upgrade; apt-get dist-upgrade;"'
 #alias fman="$FILEMAN ."
 #alias mc="java -jar ~/prog/minecraft/minecraft.jar&exit"
@@ -375,3 +379,5 @@ then
 	export JAVA_HOME="/usr/lib/jvm/java-6-openjdk-amd64";
 fi
 
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
