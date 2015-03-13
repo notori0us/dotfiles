@@ -158,6 +158,11 @@ brb() {
 	slock & sudo pm-suspend;
 }
 
+capstone-dev() {
+	cd $HOME/capstone/mypharmacist-web;
+	source venv/bin/activate
+}
+
 
 # ==============================================================================
 # = key bindings =
@@ -262,11 +267,10 @@ alias d="cd; cd Dropbox/; cd"
 # - shortcuts to existing commands (aliases) -
 # ------------------------------------------------------------------------------
 
-alias ss='sleep 5; xwd -root | convert - capture.png'
+alias ss='echo "try shutter"; sleep 5; xwd -root | convert - capture.png'
 alias off='sudo shutdown -h now'
 alias wifi="wicd-curses"
-alias secure-browser="chromium --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
-alias shadow-browser="chromium --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 darknet@23.94.15.15"
+alias secure-browser="google-chrome --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
 alias update-debian='sudo bash -c "apt-get update; apt-get upgrade; apt-get dist-upgrade;"'
 #alias fman="$FILEMAN ."
 #alias mc="java -jar ~/prog/minecraft/minecraft.jar&exit"
@@ -365,10 +369,10 @@ alias emacs="emacs -nw"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # RESEARCH
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-if [[ $(hostname) == "aquarius" ]]
-then
-source /home/chris/research/emulator-iscsi/pfe_scripts/pfe_global.sh
-fi
+#%if [[ $(hostname) == "aquarius" ]]
+#%then
+#%source /home/chris/research/emulator-iscsi/pfe_scripts/pfe_global.sh
+#%fi
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -380,4 +384,15 @@ then
 fi
 
 source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# ruby
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+chruby 1.9
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# wumbo
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+export wumbo=1
