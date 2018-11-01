@@ -256,57 +256,19 @@ alias cls="clear;ls"
 # allow others to read/execute
 #alias yours="sudo find . -perm -u+x -exec chmod a+x {} \; && sudo find . -perm -u+r -exec chmod a+r {} \;"
 
-# ------------------------------------------------------------------------------
-# - filesystem jump shortcuts (aliases)
-# ------------------------------------------------------------------------------
-
-alias a="cd; cd Dropbox/academics; cd"
-alias d="cd; cd Dropbox/; cd"
-
-# ------------------------------------------------------------------------------
-# - shortcuts to existing commands (aliases) -
-# ------------------------------------------------------------------------------
-
-alias ss='echo "try shutter"; sleep 5; xwd -root | convert - capture.png'
-alias off='sudo shutdown -h now'
-alias wifi="wicd-curses"
-alias secure-browser="google-chrome --incognito --proxy-server=\"socks5://localhost:5222\" &; ssh -D 5222 chris@notoriouscw.com"
-alias update-debian='sudo bash -c "apt-get update; apt-get upgrade; apt-get dist-upgrade;"'
-#alias fman="$FILEMAN ."
-#alias mc="java -jar ~/prog/minecraft/minecraft.jar&exit"
-#alias py="python"
-#alias py2="python2.7"
-#alias py3="python3.2"
-#alias ta="tmux attach"
-#alias :wq="exit"
-#alias :q="exit"
-#alias s="sudo"
-#alias v="vim"
-#alias ..="cd .."
-#alias ...="cd ../.."
-#alias ....="cd ../../.."
-#alias .....="cd ../../../.."
-#alias vv="cd /dev/shm/"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# ssh shortcuts
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
-alias stallman="ssh notori0us@stallman.cse.ohio-state.edu"
-#alias raspi="ssh chris@home.notoriouscw.com"
-alias idle2="ssh notori0us@opensource.osu.edu"
-alias irc="ssh irc@chriswallace.io"
-alias vps="ssh chris@chriswallace.io"
-alias torvalds="ssh -p 122 notori0us@opensource.osu.edu"
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # set default flags
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 alias ls="ls --color=auto -h --group-directories-first"
 
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # wumbo
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export wumbo=1
+
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

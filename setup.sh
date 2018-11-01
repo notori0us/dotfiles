@@ -11,7 +11,7 @@ echo "is set up" >> already_set_up
 
 for dotfile in .*
 do
-	if [ "." != "$dotfile" -a ".." != "$dotfile" ]
+	if [ "." != "$dotfile" -a ".." != "$dotfile" -a ".git" != "$dotfile" ]
 	then
 
 		if [ -n "$(find ~ -maxdepth 1 -name "$dotfile")" ]
