@@ -35,8 +35,3 @@ then
 
 	rm -rf SkyBison;
 fi
-
-# make dwm
-cd .dwm;
-make
-cd ..;
