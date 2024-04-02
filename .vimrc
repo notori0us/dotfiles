@@ -78,7 +78,7 @@ nnoremap <space>w :w<cr>
 
 " Theming
 "-------------------------------------------------------------
-colorscheme desert
+colorscheme elflord
 
 " spelling
 highlight clear SpellBad
@@ -160,6 +160,7 @@ augroup latex
 	au Filetype tex inoremap <buffer> ;mb \begin{bmatrix}<cr>\end{bmatrix}<ESC>ko
 	au Filetype tex inoremap <buffer> ;mp \begin{pmatrix}<cr>\end{pmatrix}<ESC>ko
 	au Filetype tex inoremap <buffer> ;li \begin{itemize}<cr>\end{itemize}<ESC>ko\item<space>
+	au Filetype tex inoremap <buffer> ;lc \begin{compactitem}<cr>\end{compactitem}<ESC>ko\item<space>
 	au Filetype tex inoremap <buffer> ;le \begin{enumerate}<cr>\end{enumerate}<ESC>ko\item<space>
 	au Filetype tex inoremap <buffer> ;ld \begin{description}<cr>\end{description}<ESC>ko\item[]\hfill<cr><tab><++><ESC>k0f[a
 	au Filetype tex inoremap <buffer> ;ca \begin{cases}<cr>\end{cases}<ESC>ko
