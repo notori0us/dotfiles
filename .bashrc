@@ -1,121 +1,97 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# ~/.bashrc — backup shell. Mirrors ~/.zshrc as closely as bash allows.
+# Kept bash-3.2 compatible so it runs on stock macOS bash.
 
-# If not running interactively, don't do anything
+# Bail out if not interactive
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
-# ... or force ignoredups and ignorespace
+# ------------------------------------------------------------------------------
+# History (mirrors zsh HISTSIZE/SAVEHIST)
+# ------------------------------------------------------------------------------
 HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=10000
+shopt -s histappend checkwinsize
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+# ------------------------------------------------------------------------------
+# Vi mode (mirrors zsh `bindkey -v`)
+# ------------------------------------------------------------------------------
+set -o vi
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
+# ------------------------------------------------------------------------------
+# Prompt — colored bracketed style, red-username if root
+# ------------------------------------------------------------------------------
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
 force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=no
-    fi
+if [ -n "$force_color_prompt" ] && [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    color_prompt=yes
+else
+    color_prompt=no
 fi
 
-# Prompt
 BGREEN='\[\033[1;32m\]'
 GREEN='\[\033[0;32m\]'
 BRED='\[\033[1;31m\]'
-RED='\[\033[0;31m\]'
 BBLUE='\[\033[1;34m\]'
-BLUE='\[\033[0;34m\]'
 NORMAL='\[\033[00m\]'
 
 if [ "$color_prompt" = yes ]; then
-	if [ $UID -eq 0 ]; then # root
-		PS1="${BBLUE}[${BRED}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n# "
-	else # not root
-		PS1="${BBLUE}[${BGREEN}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n\$ "
-	fi
+    if [ "$UID" -eq 0 ]; then
+        PS1="${BBLUE}[${BRED}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n# "
+    else
+        PS1="${BBLUE}[${BGREEN}\u${GREEN}@\h${BBLUE}] ${BBLUE}[${GREEN}\w${BBLUE}] ${NORMAL}\n\$ "
+    fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
+# xterm title: user@host: dir
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
-    ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+# ------------------------------------------------------------------------------
+# Editor / browser (match zsh)
+# ------------------------------------------------------------------------------
+export EDITOR="vim"
+export BROWSER="firefox"
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+# ------------------------------------------------------------------------------
+# Wumbo
+# ------------------------------------------------------------------------------
+export wumbo=1
+
+# ==============================================================================
+# = paths and tool activations (portable: Linux + macOS) =
+# ==============================================================================
+
+# pipx user bin
+[ -d "$HOME/.local/bin" ] && export PATH="$PATH:$HOME/.local/bin"
+
+# mise (only if installed)
+if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate bash)"
 fi
 
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+# Cross-platform ls flags (BSD on macOS, GNU on Linux)
+if [ "$(uname)" = "Darwin" ]; then
+    alias ls="ls -Gh"
+else
+    alias ls="ls --color=auto -h --group-directories-first"
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# Homebrew (macOS, only if installed)
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Bash completion (Debian path; macOS users typically install via brew)
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-alias stallman='ssh notori0us@stallman.cse.ohio-state.edu'
-alias irc='ssh notori0us@opensource.osu.edu'
-alias idle2='ssh notori0us@opensource.osu.edu'
-alias stdlinux='ssh wallacch@stdlinux.cse.ohio-state.edu'
-alias stdsun='ssh wallacch@stdsun.cse.ohio-state.edu'
-alias ss='sleep 5; xwd -root | xwdtopnm | pnmtopng > capture.png'
-
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Per-host overrides (kept outside the repo)
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
