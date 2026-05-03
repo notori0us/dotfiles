@@ -176,7 +176,6 @@ export SHELL="/bin/zsh"
 # Set the default text editor.
 export EDITOR="vim"
 
-export BROWSER="firefox"
 
 # If in a terminal that can use 256 colors, ensure TERM reflects that fact.
 if [ "$TERM" = "xterm" ]
