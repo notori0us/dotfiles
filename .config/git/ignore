@@ -1,0 +1,19 @@
+# Global gitignore — applies to all repos via core.excludesfile in ~/.gitconfig
+# OS noise
+.DS_Store
+._*
+Thumbs.db
+
+# Editor / swap
+*.swp
+*.swo
+.netrwhist
+.idea/
+.vscode/
+
+# Language/tool noise
+__pycache__/
+*.pyc
+.python-version
+.direnv/
+node_modules/
