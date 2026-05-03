@@ -16,12 +16,6 @@ compinit
 # End of lines added by compinstall
 
 # ==============================================================================
-# = auto startx
-# ==============================================================================
-
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
-
-# ==============================================================================
 # = general settings =
 # ==============================================================================
 
@@ -154,16 +148,6 @@ cds() {
 	cd $1 && ls
 }
 
-brb() {
-	slock & sudo pm-suspend;
-}
-
-capstone-dev() {
-	cd $HOME/capstone/mypharmacist-web;
-	source venv/bin/activate
-}
-
-
 # ==============================================================================
 # = key bindings =
 # ==============================================================================
@@ -203,19 +187,6 @@ then
 	export TERM="screen-256color"
 fi
 
-# set PDF reader
-export PDFREADER="evince"
-export PDFVIEWER="evince"
-
-# Set the default image viewer.
-export IMAGEVIEWER="google-chrome"
-
-# sets mail directory
-export MAIL="~/.mail"
-
-export TZ="America/New_York"
-
-
 # ------------------------------------------------------------------------------
 # - prompt (environmental variables) -
 # ------------------------------------------------------------------------------
@@ -253,23 +224,32 @@ alias cls="clear;ls"
 #alias yours="sudo find . -perm -u+x -exec chmod a+x {} \; && sudo find . -perm -u+r -exec chmod a+r {} \;"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# set default flags
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-alias ls="ls --color=auto -h --group-directories-first"
-
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # wumbo
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export wumbo=1
 
 
-# rbenv
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+# ==============================================================================
+# = paths and tool activations (portable: Linux + macOS) =
+# ==============================================================================
 
-# Created by `pipx` on 2025-07-22 07:37:58
-export PATH="$PATH:/home/chris/.local/bin"
+# pipx user bin
+[ -d "$HOME/.local/bin" ] && export PATH="$PATH:$HOME/.local/bin"
 
-eval "$(/home/chris/.local/bin/mise activate zsh)"
+# mise (only if installed)
+if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate zsh)"
+fi
+
+# Cross-platform ls flags (BSD on macOS, GNU on Linux)
+if [ "$(uname)" = "Darwin" ]; then
+    alias ls="ls -Gh"
+else
+    alias ls="ls --color=auto -h --group-directories-first"
+fi
+
+# Homebrew (macOS, only if installed)
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Per-host overrides (kept outside the repo)
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
