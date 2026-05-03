@@ -192,11 +192,7 @@ export SHELL="/bin/zsh"
 # Set the default text editor.
 export EDITOR="vim"
 
-if [[ -z $DISPLAY ]]; then
-	export BROWSER="elinks"
-else
-	export BROWSER="firefox"
-fi
+export BROWSER="firefox"
 
 # If in a terminal that can use 256 colors, ensure TERM reflects that fact.
 if [ "$TERM" = "xterm" ]
@@ -270,5 +266,10 @@ export wumbo=1
 
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+
+# Created by `pipx` on 2025-07-22 07:37:58
+export PATH="$PATH:/home/chris/.local/bin"
+
+eval "$(/home/chris/.local/bin/mise activate zsh)"
