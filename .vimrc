@@ -48,9 +48,7 @@ filetype indent on
 " line numbers
 set number
 
-" pathogen
 "-------------------------------------------------------------
-call pathogen#infect() 
 
 " skybison
 "-------------------------------------------------------------
