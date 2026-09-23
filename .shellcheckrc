@@ -1,0 +1,3 @@
+# SC1091: sourced files (.local overrides, system completion) are optional
+# SC2088: "~/" in messages is display text, not a path
+disable=SC1091,SC2088
