@@ -84,17 +84,10 @@ highlight SpellBad cterm=underline
 
 "---Python Mappings
 "-------------------------------------------------------------
-" Convert indentation from spaces to tabs when opening a file.
-au Filetype python retab!
-" Convert indentation from tabs to spaces when wring a file to disk, then
-" immediately back when saving is done.
-au Filetype python au BufWritePre * :set expandtab
-au Filetype python au BufWritePre * :retab!
-au Filetype python au BufWritePost * :set noexpandtab!
-au Filetype python au BufWritePost * :retab!
-
 augroup python
-	autocmd Filetype python nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;perl %<cr>
+	autocmd!
+	autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+	autocmd Filetype python nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;python3 %<cr>
 augroup END
 
 "---C Mappings
@@ -102,7 +95,7 @@ augroup END
 augroup c
 	autocmd!
 	" Set compiler.
-	autocmd Filetype c set makeprg=gcc
+	autocmd Filetype c setlocal makeprg=gcc
 	" Execute result.
 	autocmd Filetype c nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;./a.out<cr>
 augroup END
@@ -112,7 +105,7 @@ augroup END
 augroup cpp
 	autocmd!
 	" Set compiler.
-	autocmd Filetype cpp set makeprg=g++
+	autocmd Filetype cpp setlocal makeprg=g++
 	" Execute result.
 	autocmd Filetype cpp nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;./a.out<cr>
 augroup END
@@ -121,21 +114,24 @@ augroup END
 "---Perl Mappings
 "-------------------------------------------------------------
 augroup perl
+	autocmd!
 	autocmd Filetype perl nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;perl %<cr>
 augroup END
 
 "---Ruby Mappings
 "-------------------------------------------------------------
 augroup ruby
+	autocmd!
 	autocmd Filetype ruby nnoremap <buffer> <space>r :cd %:p:h<cr>:!clear;ruby %<cr>
-	autocmd Filetype ruby set ts=2 sts=2 sw =2
-	autocmd Filetype yaml set ts=2 sts=2 sw =2
+	autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+	autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 augroup END
 
 "---TeX Mappings
 "-------------------------------------------------------------
 "let g:tex_flavor='latex'
 augroup latex
+	autocmd!
 	" compile command
 	autocmd Filetype tex setlocal makeprg=lualatex\ \-file\-line\-error\ \-interaction=nonstopmode\ $*\\\|\ awk\ '/^\\(.*.tex$/{sub(/^./,\"\",$0);X=$0}\ /^!/{sub(/^./,\"\",$0);print\ X\":1:\"$0}\ /tex:[0-9]+:\ /{A=$0;MORE=2}\ (MORE==2\ &&\ /^l.[0-9]/){sub(/^l.[0-9]+[\ \\t]+/,\"\",$0);B=$0;MORE=1}\ (MORE==1\ &&\ /^[\ ]+/){sub(/^[\ \\t]+/,\"\",$0);print\ A\":\ \"B\"·\"$0;MORE=0}'
 
