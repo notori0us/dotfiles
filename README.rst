@@ -24,8 +24,9 @@ Per-host overrides
 ------------------
 
 Anything host-specific (work env, secrets, machine-particular tweaks)
-belongs in ``~/.zshrc.local`` and/or ``~/.bashrc.local``. Both are
-sourced last by the respective rc files and are *not* tracked here.
+belongs in ``~/.zshrc.local``, ``~/.bashrc.local`` and/or ``~/.gitconfig.local``.
+The rc files source theirs last, ``.gitconfig`` includes its one, and
+none of them are tracked here.
 
 Caveat
 ------

@@ -3,3 +3,5 @@
 	email = cbwcjw@gmail.com
 [core]
 	excludesfile = ~/.config/git/ignore
+[include]
+	path = ~/.gitconfig.local

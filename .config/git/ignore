@@ -17,3 +17,6 @@ __pycache__/
 .python-version
 .direnv/
 node_modules/
+
+# Claude Code per-user overrides
+.claude/settings.local.json
