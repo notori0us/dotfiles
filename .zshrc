@@ -1,19 +1,32 @@
 # With great thanks and credit to Paradigm and his wonderfully crafted .zshrc
 # https://github.com/paradigm/dotfiles/blob/master/.zshrc
 
-# Lines configured by zsh-newuser-install, minus those also set by Paradigm
 HISTFILE=~/.history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-#zstyle :compinstall filename '/home/embo/.zshrc'
 
-# autocompletion?
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# ==============================================================================
+# = paths and tool activations (portable: Linux + macOS) =
+# ==============================================================================
+# Runs before compinit so brew's site-functions and mise tools are on fpath/PATH.
+
+# de-duplicate PATH/fpath entries (login shells may have added some already)
+typeset -U path fpath
+
+# Homebrew (macOS; Apple Silicon or Intel)
+for _brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    [ -x "$_brew" ] && { eval "$("$_brew" shellenv)"; break; }
+done
+unset _brew
+
+# user bin (mise, pipx, hand-installed tools)
+path=("$HOME/.local/bin" $path)
+
+# mise (only if installed)
+if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate zsh)"
+fi
 
 # ==============================================================================
 # = general settings =
@@ -40,7 +53,7 @@ setopt nobgnice
 # Disable flow control. Specifically, ensure that ctrl-s does not stop
 # terminal flow so that it can be used in other programs (such as Vim).
 setopt noflowcontrol
-stty -ixon
+[[ -t 0 ]] && stty -ixon
 
 # Do not kill background processes when closing the shell. 
 setopt nohup
@@ -71,11 +84,12 @@ bindkey -v
 
 # Zsh's completion can benefit from caching. Set the directory in which to
 # load/store the caches.
-CACHEDIR="$HOME/.zsh/$(uname -n)"
+CACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+[ -d "$CACHEDIR" ] || mkdir -p "$CACHEDIR"
 
-# Use completion functionality.
-autoload -U compinit
-compinit -d $CACHEDIR/zcompdump 2>/dev/null
+# Use completion functionality. -i: skip insecure dirs (brew on macOS) quietly.
+autoload -Uz compinit
+compinit -i -d "$CACHEDIR/zcompdump"
 
 # cache, speed things up
 zstyle ':completion:*' use-cache on
@@ -169,10 +183,6 @@ bindkey "^V" prepend-vim
 # - general (evironmental variables) -
 # ------------------------------------------------------------------------------
 
-# "/bin/zsh" should be the value of $SHELL if this config is parsed. This line
-# should not be necessary, but it's not a bad idea to have just in case.
-export SHELL="/bin/zsh"
-
 # Set the default text editor.
 export EDITOR="vim"
 
@@ -229,16 +239,8 @@ export wumbo=1
 
 
 # ==============================================================================
-# = paths and tool activations (portable: Linux + macOS) =
+# = portable aliases =
 # ==============================================================================
-
-# pipx user bin
-[ -d "$HOME/.local/bin" ] && export PATH="$PATH:$HOME/.local/bin"
-
-# mise (only if installed)
-if command -v mise >/dev/null 2>&1; then
-    eval "$(mise activate zsh)"
-fi
 
 # Cross-platform ls flags (BSD on macOS, GNU on Linux)
 if [ "$(uname)" = "Darwin" ]; then
@@ -247,8 +249,5 @@ else
     alias ls="ls --color=auto -h --group-directories-first"
 fi
 
-# Homebrew (macOS, only if installed)
-[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # Per-host overrides (kept outside the repo)
-[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+if [ -f "$HOME/.zshrc.local" ]; then source "$HOME/.zshrc.local"; fi

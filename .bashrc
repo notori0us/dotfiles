@@ -1,4 +1,5 @@
 # ~/.bashrc — backup shell. Mirrors ~/.zshrc as closely as bash allows.
+# shellcheck shell=bash
 # Kept bash-3.2 compatible so it runs on stock macOS bash.
 
 # Bail out if not interactive
@@ -69,8 +70,18 @@ export wumbo=1
 # = paths and tool activations (portable: Linux + macOS) =
 # ==============================================================================
 
-# pipx user bin
-[ -d "$HOME/.local/bin" ] && export PATH="$PATH:$HOME/.local/bin"
+# Homebrew (macOS; Apple Silicon or Intel)
+for _brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [ -x "$_brew" ]; then eval "$("$_brew" shellenv)"; break; fi
+done
+unset _brew
+
+# user bin (mise, pipx, hand-installed tools); skip if a login shell added it
+case ":$PATH:" in
+    *":$HOME/.local/bin:"*) ;;
+    *) PATH="$HOME/.local/bin:$PATH" ;;
+esac
+export PATH
 
 # mise (only if installed)
 if command -v mise >/dev/null 2>&1; then
@@ -84,13 +95,14 @@ else
     alias ls="ls --color=auto -h --group-directories-first"
 fi
 
-# Homebrew (macOS, only if installed)
-[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Bash completion (Debian path; macOS users typically install via brew)
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+# Bash completion: Debian system path, else Homebrew's bash-completion@2
+if ! shopt -oq posix; then
+    if [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    elif [ -n "${HOMEBREW_PREFIX:-}" ] && [ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]; then
+        . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    fi
 fi
 
 # Per-host overrides (kept outside the repo)
-[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+if [ -f "$HOME/.bashrc.local" ]; then source "$HOME/.bashrc.local"; fi
