@@ -56,9 +56,9 @@ jobs:
         run: |
           err=$(zsh -i -c exit 2>&1 >/dev/null)
           test -z "$err" || { echo "$err"; exit 1; }
-      - name: bash starts clean
+      - name: bash starts clean (system bash; 3.2 on macOS)
         run: |
-          err=$(bash -i -c exit 2>&1 >/dev/null | grep -v 'no job control' | grep -v 'cannot set terminal process group' | grep -vx exit || true)
+          err=$(/bin/bash -i -c exit 2>&1 >/dev/null | grep -v 'no job control' | grep -v 'cannot set terminal process group' | grep -vx exit || true)
           test -z "$err" || { echo "$err"; exit 1; }
       - name: vim loads vimrc without errors
         run: vim -Nu "$HOME/.vimrc" -i NONE -es -c 'if v:errmsg != "" | cquit | endif' -c 'qa!' </dev/null
