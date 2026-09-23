@@ -1,0 +1,72 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: shellcheck
+        run: shellcheck setup.sh teardown.sh .bashrc
+      - name: toml parses
+        run: python3 -c 'import sys,tomllib; [tomllib.load(open(f,"rb")) for f in sys.argv[1:]]' $(git ls-files '*.toml')
+
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      HOME: ${{ github.workspace }}/../fakehome
+    steps:
+      - uses: actions/checkout@v5
+      - name: deps (linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq zsh vim tmux
+      - name: deps (macos)
+        if: runner.os == 'macOS'
+        run: command -v tmux || brew install tmux
+      - name: fake home with legacy drift
+        run: |
+          mkdir -p "$HOME"
+          ln -s "$PWD/.vim" "$HOME/.vim"            # old directory link
+          echo 'old' > "$HOME/.zshrc"               # real file to back up
+          ln -s "$PWD/.gitignore" "$HOME/.gitignore" # orphan link
+      - name: check reports drift
+        run: if /bin/bash ./setup.sh --check --no-mise; then exit 1; fi
+      - name: setup (system bash; 3.2 on macOS)
+        run: /bin/bash ./setup.sh --no-mise
+      - name: setup is idempotent
+        run: |
+          out=$(/bin/bash ./setup.sh --no-mise | grep -E '^(link|backup|unfold|prune) ' || true)
+          test -z "$out" || { echo "$out"; exit 1; }
+      - name: links in place
+        run: |
+          test "$(readlink "$HOME/.zshrc")" = "$PWD/.zshrc"
+          test ! -L "$HOME/.vim" && test -L "$HOME/.vim/pack/plugins/start/skybison/plugin/skybison.vim"
+          test ! -e "$HOME/.gitignore"
+          test "$(cat "$HOME"/backup/dotfiles-*/.zshrc)" = old
+      - name: bootstrap mise
+        run: /bin/bash ./setup.sh && "$HOME/.local/bin/mise" --version || mise --version
+      - name: zsh starts clean
+        run: |
+          err=$(zsh -i -c exit 2>&1 >/dev/null)
+          test -z "$err" || { echo "$err"; exit 1; }
+      - name: bash starts clean
+        run: |
+          err=$(bash -i -c exit 2>&1 >/dev/null | grep -v 'no job control' | grep -v 'cannot set terminal process group' | grep -vx exit || true)
+          test -z "$err" || { echo "$err"; exit 1; }
+      - name: vim loads vimrc without errors
+        run: vim -Nu "$HOME/.vimrc" -i NONE -es -c 'if v:errmsg != "" | cquit | endif' -c 'qa!' </dev/null
+      - name: tmux accepts config
+        run: tmux -f "$HOME/.tmux.conf" -L ci new-session -d && tmux -L ci kill-server
+      - name: git config resolves
+        run: git config --global --list --show-origin
+      - name: teardown restores
+        run: |
+          /bin/bash ./teardown.sh --yes
+          test "$(cat "$HOME/.zshrc")" = old
