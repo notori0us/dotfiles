@@ -1,2 +1,11 @@
+# Global mise config, shared by every host (Linux + macOS).
+# Project toolchains belong in that project's mise.toml (the homelab's is
+# ~/workspace/mise.toml); untracked per-machine extras go in
+# ~/.config/mise/conf.d/local.toml.
+
+[settings]
+# honour .ruby-version files (rbenv/chruby convention) in project dirs
+idiomatic_version_file_enable_tools = ["ruby"]
+
 [tools]
 rust = "1.93.0"
